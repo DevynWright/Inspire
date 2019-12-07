@@ -11,4 +11,8 @@ export default class Weather {
     this.city = data.name
     this.kelvin = data.main.temp
   }
+  get Template(){
+    let template = `<h2><b>City:${this.city}  Kelvin:${this.kelvin}</b></h2>`
+    return template;
+  }
 }
