@@ -1,20 +1,25 @@
 import store from "../store.js";
-
+import Todos from"../models/todo.js";
 // @ts-ignore
 const todoApi = axios.create({
-  baseURL: "https://bcw-sandbox.herokuapp.com/api/Devvyn/todos/",
+  baseURL: "https://bcw-sandbox.herokuapp.com/api/Devyn/todos/",
   timeout: 8000
 });
 
 class TodoService {
   async getTodos() {
-    console.log("Getting the Todo List");
     let res = await todoApi.get();
+    let todo = res.data.data.map(todo => new Todos(todo))
+    console.log("frome the todo api", res)
+    store.commit("todos", todo)
+    console.log("results from todo store", store.State.todos);
     //TODO Handle this response from the server
   }
 
   async addTodoAsync(todo) {
     let res = await todoApi.post("", todo);
+    console.log("from todo service", res);
+    this.getTodos()
     //TODO Handle this response from the server (hint: what data comes back, do you want this?)
   }
 
@@ -29,6 +34,8 @@ class TodoService {
   }
 
   async removeTodoAsync(todoId) {
+    let res = await todoApi.delete(todoId);
+    this.getTodos();
     //TODO Work through this one on your own
     //		what is the request type
     //		once the response comes back, what do you need to insure happens?
