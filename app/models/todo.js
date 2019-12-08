@@ -5,7 +5,11 @@ export default class Todos{
         this.desc = data.description
     }
     get Template(){
-        return `<li><b>${this.desc}</b><button class="btn btn-dark" onclick="app.todoController.removeTodo('${this._id}')">x</button></li>`
+        if(this.completed == false){
+            return `<li><b>${this.desc}   </b><input onclick="app.todoController.toggleTodoStatus('${this._id}')" type="checkbox"</input><button class="btn btn-dark" onclick="app.todoController.removeTodo('${this._id}')">x</button></li>`    
+        } else {
+            return `<li style="text-decoration: line-through"><b>${this.desc}   </b><input onclick="app.todoController.toggleTodoStatus('${this._id}')" type="checkbox"</input><button class="btn btn-dark" onclick="app.todoController.removeTodo('${this._id}')">x</button></li>`
+        }
 ;
     }
 }

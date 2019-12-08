@@ -13,23 +13,27 @@ class TodoService {
     console.log("frome the todo api", res)
     store.commit("todos", todo)
     console.log("results from todo store", store.State.todos);
-    //TODO Handle this response from the server
   }
 
   async addTodoAsync(todo) {
     let res = await todoApi.post("", todo);
     console.log("from todo service", res);
     this.getTodos()
-    //TODO Handle this response from the server (hint: what data comes back, do you want this?)
   }
 
   async toggleTodoStatusAsync(todoId) {
     let todo = store.State.todos.find(todo => todo._id == todoId);
+    console.log("from the todo toggle", todo )
     //TODO Make sure that you found a todo,
     //		and if you did find one
     //		change its completed status to whatever it is not (ex: false => true or true => false)
-
+    if(todo.completed){
+      todo.completed = false;
+    } else {
+      todo.completed = true;
+    }
     let res = await todoApi.put(todoId, todo);
+    this.getTodos();
     //TODO do you care about this data? or should you go get something else?
   }
 
