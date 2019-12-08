@@ -6,8 +6,8 @@ export default class Quote {
   
 
   get Template(){
-      return `<div><h2><b>${this.body}</b></h2></div>
-      <div><h4><b>Author: ${this.author}</b></div>
+      return `<div class="text-white"><h2><b>${this.body}</b></h2></div>
+      <div class="text-white"><h4><b>Author: ${this.author}</b></div>
       `
   }
   };

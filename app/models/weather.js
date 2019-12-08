@@ -9,10 +9,10 @@ export default class Weather {
     //      check out the other data that comes back and see if there is anything you want to try
 
     this.city = data.name
-    this.kelvin = data.main.temp
+    this.kelvin = Math.round((data.main.temp * 9) / 5 -459.67 )
   }
   get Template(){
-    let template = `<h2><b>City:${this.city}  Kelvin:${this.kelvin}</b></h2>`
+    let template = `<h2 class="text-white"><b>${this.city}  ${this.kelvin}°</b></h2>`
     return template;
   }
 }
